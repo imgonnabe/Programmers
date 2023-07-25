@@ -4,6 +4,7 @@ public class AC1 {
 	public int solution(int temperature, int t1, int t2, int a, int b, int[] onboard) {
 		int answer = temperature;
 		int answer2 = 0;
+		int[] num = new int[onboard.length];
 		for (int i = 0; i < onboard.length && t1 <= answer && answer <= t2; i++) {
 			if (onboard[i] == 1) {
 				int coinFlip = (int) (Math.random() * 3);
@@ -29,7 +30,15 @@ public class AC1 {
 					}
 				}
 			}
+			num[i] = answer2;
 		}
-		return answer2;
+		
+		int min = num[0];
+		for (int i = 1; i < num.length; i++) {
+			if (num[i] < min) {
+				min = num[i];
+			}
+		}
+		return min;
 	}
 }
