@@ -1,36 +1,30 @@
 package ac;
 
 public class AC1 {
-	public int solution(int temperature, int t1, int t2, int a, int b, int[] onboard) {
-		int answer = temperature;
-		int answer2 = 0;
+	public int solution(int temperature, int t1, int t2, int a, int b, int[] onboard, int hope) {
+		int answer = 0;
 		int[] num = new int[onboard.length];
-		for (int i = 0; i < onboard.length && t1 <= answer && answer <= t2; i++) {
+		for (int i = 0; i < onboard.length && t1 <= temperature && temperature <= t2 && t1 < t2; i++) {
 			if (onboard[i] == 1) {
-				int coinFlip = (int) (Math.random() * 3);
-				if (coinFlip == 0) {
-					answer += 1;
-					if (temperature == answer) {
-						answer2 += answer * b;
-					} else {
-						answer2 += answer * a;
-					}
-				} else if (coinFlip == 1) {
-					answer -= 1;
-					if (temperature == answer) {
-						answer2 += answer * b;
-					} else {
-						answer2 += answer * a;
-					}
+				if (temperature > hope) {
+					temperature -= 1;
+					answer += a; 
+				} else if (temperature < hope) {
+					temperature += 1;
+					answer += a;
 				} else {
-					if (temperature == answer) {
-						answer2 += answer * b;
-					} else {
-						answer2 += answer * a;
-					}
+					answer += b;
+				}
+			} else {
+				if (temperature > hope) {
+					temperature -= 1;
+				} else if (temperature < hope) {
+					temperature += 1;
+				} else {
+					
 				}
 			}
-			num[i] = answer2;
+			num[i] = answer;
 		}
 		
 		int min = num[0];
